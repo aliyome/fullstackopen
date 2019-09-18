@@ -14,3 +14,8 @@
 - JSX は「XML ライク」で全て閉じタグが必要
 - コンポーネント名は 1 文字目を必ず大文字にする
 - ルート要素は必ず一つにする必要があるが、`<>`(fragment: 空要素)にすることもできる(`ng-container`っぽい)
+
+```js
+setTimeout(arto.greet, 1000); // greet内のthisはTimeoutオブジェクトを指す
+setTimeout(arto.greet.bind(arto), 1000); // thisをartoにバインドした関数を新しく作成する
+```
