@@ -19,3 +19,8 @@
 setTimeout(arto.greet, 1000); // greet内のthisはTimeoutオブジェクトを指す
 setTimeout(arto.greet.bind(arto), 1000); // thisをartoにバインドした関数を新しく作成する
 ```
+
+```jsx
+const [counter, setCounter] = useState(0);
+setTimeout(() => setCounter(counter + 1), 1000); // setCounterの度に再描画するため1秒毎にカウントアップする
+```
