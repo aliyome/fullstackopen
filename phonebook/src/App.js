@@ -55,7 +55,9 @@ const App = () => {
       <PersonForm
         addPerson={addPerson}
         handleNewNameChange={handleNewNameChange}
+        newName={newName}
         handleNewNumberChange={handleNewNumberChange}
+        newNumber={newNumber}
       />
 
       <h2>Numbers</h2>
