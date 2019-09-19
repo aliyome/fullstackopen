@@ -8,17 +8,16 @@ const Part = ({ part }) => (
   </p>
 );
 
-const Content = ({ parts }) => (
-  <div>
-    <Part part={parts[0]} />
-    <Part part={parts[1]} />
-    <Part part={parts[2]} />
-  </div>
-);
+const Content = ({ parts }) => {
+  const rows = parts.map(x => <Part key={x.name} part={x} />);
 
-const Total = ({ parts }) => (
-  <p>Number of exercises {parts[0].exercises + parts[1].exercises + parts[2].exercises}</p>
-);
+  return <div>{rows}</div>;
+};
+
+const Total = ({ parts }) => {
+  const sum = parts.reduce((x, y) => x + y.exercises, 0);
+  return <p>Number of exercises {sum}</p>;
+};
 
 const Course = ({ course }) => (
   <>
