@@ -68,3 +68,7 @@ const App = (props) => {
 ### 要調査
 
 - `setState`を`App`内に全て詰め込んでいるのでどんどん Fat になるが良いのか？
+
+## Part3
+
+Express, MongoDB によるバックエンドサーバの実装と、ESLint による検証について学べる
