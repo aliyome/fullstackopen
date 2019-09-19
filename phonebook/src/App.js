@@ -32,6 +32,16 @@ const App = () => {
     });
   };
 
+  const deletePerson = person => event => {
+    event.preventDefault();
+    if (!window.confirm(`Delete ${person.name}?`)) {
+      return;
+    }
+    personsService.remove(person.id).then(_ => {
+      setPersons(persons.filter(x => x.id !== person.id));
+    });
+  };
+
   const handleNewNameChange = event => {
     setNewName(event.target.value);
   };
@@ -59,7 +69,7 @@ const App = () => {
       />
 
       <h2>Numbers</h2>
-      <Persons persons={filteredPersons} />
+      <Persons persons={filteredPersons} deletePerson={deletePerson} />
     </div>
   );
 };

@@ -1,9 +1,10 @@
 import React from 'react';
 
-const Persons = ({ persons, filter }) => {
-  const personList = persons.map(x => (
-    <div key={x.id}>
-      {x.name} {x.number}
+const Persons = ({ persons, deletePerson }) => {
+  const personList = persons.map(person => (
+    <div key={person.id}>
+      {person.name} {person.number}
+      <button onClick={deletePerson(person)}>delete</button>
     </div>
   ));
 
