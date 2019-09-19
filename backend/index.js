@@ -1,7 +1,9 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
 const bodyParser = require('body-parser');
 
+app.use(cors());
 app.use(bodyParser.json());
 
 let notes = [
@@ -74,7 +76,8 @@ app.post('/notes', (req, res) => {
   res.json(note);
 });
 
-const PORT = 3001;
+// Heroku uses `process.env.PORT`.
+const PORT = process.env.PORT || 3001;
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
