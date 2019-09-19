@@ -82,3 +82,6 @@ Express で`response.status(404).end();`のように`end()`を使うと応答の
 > > Methods can also have the property of "idempotence" in that (aside from error or expiration issues) the side-effects of N > 0 identical requests is the same as for a single request. The methods GET, HEAD, PUT and DELETE share this property
 
 これまでのプロジェクトで DELETE は冪等に作っていなかった（削除したら専用の応答が返ってくる）ので気をつけなければ…
+
+package.json に`proxy`を設定すると相対パスの向き先を変更できる。
+たとえば、`"proxy": "http://localhost:3001"`と記述すると、React アプリ側から`/api/hoge`にアクセスすると、`http://localhost:3001/api/hoge`にリダイレクトされる
