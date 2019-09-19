@@ -1,11 +1,14 @@
 import React from 'react';
 import Course from './Course';
 
-const App = ({ course }) => {
+const App = ({ courses }) => {
+  const rows = courses.map(x => <Course key={x.id} course={x} />);
+
   return (
-    <div>
-      <Course course={course} />
-    </div>
+    <>
+      <h1>Web development curriculum</h1>
+      <div>{rows}</div>
+    </>
   );
 };
 
