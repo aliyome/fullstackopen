@@ -24,3 +24,36 @@ setTimeout(arto.greet.bind(arto), 1000); // thisをartoにバインドした関�
 const [counter, setCounter] = useState(0);
 setTimeout(() => setCounter(counter + 1), 1000); // setCounterの度に再描画するため1秒毎にカウントアップする
 ```
+
+`useState()`はフックが常に同じ順番で実行されるように、**ループ中、条件分岐、コンポーネントを定義する関数以外で呼んではいけない**
+
+```jsx
+const App = (props) => {
+  // these are ok
+  const [age, setAge] = useState(0)
+  const [name, setName] = useState('Juha Tauriainen')
+
+  if ( age > 10 ) {
+    // this does not work!
+    const [foobar, setFoobar] = useState(null)
+  }
+
+  for ( let i = 0; i < age; i++ ) {
+    // also this is not good
+    const [rightWay, setRightWay] = useState(false)
+  }
+
+  const notGood = () => {
+    // and this is also illegal
+    const [x, setX] = useState(-1000)
+  }
+
+  return (
+    //...
+  )
+}
+```
+
+> Beware the official React tutorial, it's not very good.
+
+:sob:
