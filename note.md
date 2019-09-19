@@ -76,3 +76,9 @@ Express, MongoDB によるバックエンドサーバの実装と、ESLint に�
 `nodemon`を使うと、ファイルに修正が入る度に再実行してくれて便利。
 
 Express で`response.status(404).end();`のように`end()`を使うと応答のみ返す
+
+> All HTTP requests except POST should be idempotent:
+>
+> > Methods can also have the property of "idempotence" in that (aside from error or expiration issues) the side-effects of N > 0 identical requests is the same as for a single request. The methods GET, HEAD, PUT and DELETE share this property
+
+これまでのプロジェクトで DELETE は冪等に作っていなかった（削除したら専用の応答が返ってくる）ので気をつけなければ…
