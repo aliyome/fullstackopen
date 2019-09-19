@@ -4,6 +4,15 @@ const bodyParser = require('body-parser');
 
 app.use(bodyParser.json());
 
+const requestLogger = (req, res, next) => {
+  console.log(`Method: ${req.method}`);
+  console.log(`Path: ${req.path}`);
+  console.log(`Body: ${req.body}`);
+  console.log('----');
+  next();
+};
+app.use(requestLogger);
+
 let persons = [
   {
     name: 'Arto Hellas',
@@ -82,6 +91,12 @@ app.get('/info', (req, res) => {
   } people<p><p>${new Date().toString()}</p>`;
   res.send(message);
 });
+
+const unknownEndpoint = (req, res, next) => {
+  res.status(404).send({ error: 'unknown endpoint' });
+};
+
+app.use(unknownEndpoint);
 
 const PORT = 3001;
 app.listen(PORT, () => {
