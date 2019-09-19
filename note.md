@@ -64,3 +64,7 @@ const App = (props) => {
 
 - 再レンダリング時に要素を一意に識別するために、コレクションの一部等には`key`が必要な場合がある
   - [Reconciliation – React](https://reactjs.org/docs/reconciliation.html#recursing-on-children)
+
+### 要調査
+
+- `setState`を`App`内に全て詰め込んでいるのでどんどん Fat になるが良いのか？
