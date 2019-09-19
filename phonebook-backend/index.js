@@ -59,6 +59,19 @@ app.post('/api/persons', (req, res) => {
     id: uid,
   };
 
+  let error = '';
+
+  if (!person.name) {
+    error += 'name is required.';
+  }
+  if (persons.find(x => x.name === person.name)) {
+    error += 'name must be unique.';
+  }
+
+  if (error.length > 0) {
+    return res.status(400).json({ error });
+  }
+
   persons = persons.concat(person);
   res.json(person);
 });
