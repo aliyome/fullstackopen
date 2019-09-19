@@ -1,5 +1,8 @@
 const express = require('express');
 const app = express();
+const bodyParser = require('body-parser');
+
+app.use(bodyParser.json());
 
 let notes = [
   {
@@ -44,6 +47,16 @@ app.delete('/notes/:id', (req, res) => {
   const id = Number(req.params.id);
   notes = notes.filter(note => note.id !== id);
   res.status(204).end();
+});
+
+app.post('/notes', (req, res) => {
+  const maxId = notes.length > 0 ? Math.max(...notes.map(n => n.id)) : 0;
+
+  const note = req.body;
+  note.id = maxId + 1;
+  notes = notes.concat(note);
+
+  res.json(note);
 });
 
 const PORT = 3001;
