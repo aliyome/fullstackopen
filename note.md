@@ -72,3 +72,7 @@ const App = (props) => {
 ## Part3
 
 Express, MongoDB によるバックエンドサーバの実装と、ESLint による検証について学べる
+
+`nodemon`を使うと、ファイルに修正が入る度に再実行してくれて便利。
+
+Express で`response.status(404).end();`のように`end()`を使うと応答のみ返す
