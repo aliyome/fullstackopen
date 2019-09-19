@@ -20,9 +20,15 @@ const App = () => {
   const toggleImportanceOf = id => {
     const note = notes.find(n => n.id === id);
     const changedNote = { ...note, important: !note.important };
-    noteService.update(id, changedNote).then(returnedNote => {
-      setNotes(notes.map(note => (note.id !== id ? note : returnedNote)));
-    });
+    noteService
+      .update(id, changedNote)
+      .then(returnedNote => {
+        setNotes(notes.map(note => (note.id !== id ? note : returnedNote)));
+      })
+      .catch(err => {
+        alert(`the note '${note.content}' was already deleted from server.`);
+        setNotes(notes.filter(x => x.id !== id));
+      });
   };
 
   const rows = notesToShow.map(note => (
