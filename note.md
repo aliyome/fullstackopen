@@ -57,3 +57,10 @@ const App = (props) => {
 > Beware the official React tutorial, it's not very good.
 
 :sob:
+
+## Part2
+
+コレクションのレンダリング、フォームコントロール、API リクエストを学べる
+
+- 再レンダリング時に要素を一意に識別するために、コレクションの一部等には`key`が必要な場合がある
+  - [Reconciliation – React](https://reactjs.org/docs/reconciliation.html#recursing-on-children)
