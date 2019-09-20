@@ -85,3 +85,47 @@ Express で`response.status(404).end();`のように`end()`を使うと応答の
 
 package.json に`proxy`を設定すると相対パスの向き先を変更できる。
 たとえば、`"proxy": "http://localhost:3001"`と記述すると、React アプリ側から`/api/hoge`にアクセスすると、`http://localhost:3001/api/hoge`にリダイレクトされる
+
+node で web サーバを書く場合は、`node --inspect index.js`で実行すると、chrome のデバッガが利用出来て便利。でも vscode のデバッガでも良いかも。
+
+Part3 の Heroku 利用あたりからは**学習時間短縮のため、実装はそこそこに読み物として学習する**
+
+- MongoDB Atlas は無料でも 512MB のストレージを利用できる
+- `prcess.env.HOGE_VAR`で環境変数を利用できる
+- `dotenv`ライブラリを利用すると、`.env`ファイルに環境変数を定義できて便利(**.gitignore を忘れずに**)
+  - `require('dotenv').config()`すると、`process.env.HOGEHOGE`が利用できる
+- `mongoose`はスキーマに制約を付与できる、validation が可能
+
+```js
+// mongooseでスキーマを作った後、mongodbからデータを取得する際、不要なプロパティは削除する
+hogeSchema.set('toJSON', {
+  transform: (doc, returnedObject) => {
+    returnedObject.id = returnedObject._id.toString(); // mongodbに管理されたuidをidとして使う
+    delete returnedObject._id; // mongodbが管理する不要なフィールドを削除する
+    delete returnedObject.__v;
+  },
+});
+```
+
+Express はよくあるミドルウェアをリクエスト・レスポンスに挟むアーキテクチャなので、エラーは`next(err)`に実質リスローすると便利
+
+```js
+(req, res, next) => {
+  try {
+    // do something.
+  } catch (err) {
+    next(err);
+  }
+};
+
+const errorHandler = (err, req, res, next) => {
+  if (err.name === 'CastError' && error.kind === 'ObjectId') {
+    return res.status(400).json({ error: 'malformatted id' });
+  }
+  next(error);
+};
+
+app.use(errorHandler);
+```
+
+**後で読む** [airbnb/javascript: JavaScript Style Guide](https://github.com/airbnb/javascript)
